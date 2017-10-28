@@ -4,13 +4,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import renders as rs
 from IPython.display import display
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 
 # Importing the dataset
-data = pd.read_csv('../resource/customers.csv')
+data = pd.read_csv('../resources/dataset/customers.csv')
 data.drop(['Region', 'Channel'], axis = 1, inplace = True) 
 
 # TODO: Selecione três índices de sua escolha que você gostaria de obter como amostra do conjunto de dados
@@ -27,6 +28,7 @@ log_samples = np.log(samples)
 
 # Para cada atributo encontre os pontos de dados com máximos valores altos e baixos
 outliersList = []
+outlierSizes = []
 for feature in log_data.keys():
     
     # TODO: Calcule Q1 (25º percentil dos dados) para o atributo dado
@@ -45,7 +47,21 @@ for feature in log_data.keys():
     #Adicionando automaticamente os outliers a uma lista para posterior remoção
     outlier = log_data[~((log_data[feature] >= Q1 - step) & (log_data[feature] <= Q3 + step))].index.tolist()
     outliersList += outlier
+    outlierSizes.append(len(outlier))
 
+plt.rcdefaults()
+fig, ax = plt.subplots(figsize=(9, 3))
+features = ('Fresh', 'Milk', 'Grocery',	'Frozen',	'Detergents_Paper',	'Delicatessen')
+error = [0,0,0,0,0,0]
+y_pos = np.arange(len(features))
+ax.barh(y_pos, outlierSizes, xerr=error, align='center', color='blue', ecolor='black')
+ax.set_yticks(y_pos)
+ax.set_yticklabels(features)
+ax.invert_yaxis()  # labels read top-to-bottom
+ax.set_xlabel('Pontos de desvios')
+ax.set_title('Pontos de Desvios de cada categoria')
+
+plt.show()
         
 # OPCIONAL: Selecione os índices dos pontos de dados que você deseja remover
 outliers  = list(set(outliersList)) #Usando set para pegar os itens unicos da lista gerada no loop
@@ -63,6 +79,7 @@ pca.fit(good_data)
 
 # TODO: Transforme a amostra de data-log utilizando o ajuste da PCA acima
 pca_samples = pca.transform(log_samples)
+pca_results = rs.pca_results(good_data, pca)
 
 # TODO: Aplique o PCA ao ajusta os bons dados com apenas duas dimensões
 pca = PCA(n_components = 2)
