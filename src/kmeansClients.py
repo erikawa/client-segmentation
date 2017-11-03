@@ -94,6 +94,37 @@ pca_samples = pca.transform(log_samples)
 # Crie o DataFrame para os dados reduzidos
 reduced_data = pd.DataFrame(reduced_data, columns = ['Dimension 1', 'Dimension 2'])
 
+# achar o número ideal de clusters método Elbow
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters = i, init = 'k-means++', random_state = 0)
+    kmeans.fit(reduced_data);
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1,11), wcss)
+plt.title('Elbow Method')
+plt.xlabel('Número de Clusters')
+plt.ylabel('WSS')
+plt.show();
+
+for K in range(2,7):
+    # TODO: Aplique o algoritmo de clustering de sua escolha aos dados reduzidos 
+    clusterer = KMeans(n_clusters = K, max_iter = 200, n_init = 1, init = 'random', random_state = 101)
+    clusterer.fit(reduced_data)
+
+    # TODO: Preveja o cluster para cada ponto de dado
+    preds = clusterer.predict(reduced_data)
+
+    # TODO: Ache os centros do cluster
+    centers = clusterer.cluster_centers_
+
+
+    # TODO: Preveja o cluster para cada amostra de pontos de dado transformados
+    sample_preds = clusterer.predict(pca_samples)
+
+    # TODO: Calcule a média do coeficiente de silhueta para o número de clusters escolhidos
+    score = silhouette_score(reduced_data, preds)
+    print('Coeficiente para {} clusters = {}'.format(K, score))
+
 # Separando o código para o número ótimo de clusters
 
 # TODO: Aplique o algoritmo de clustering de sua escolha aos dados reduzidos 
