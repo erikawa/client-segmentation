@@ -106,7 +106,7 @@ plt.xlabel('Número de Clusters')
 plt.ylabel('WSS')
 plt.show();
 
-for K in range(2,7):
+for K in range(2,11):
     # TODO: Aplique o algoritmo de clustering de sua escolha aos dados reduzidos 
     clusterer = KMeans(n_clusters = K, max_iter = 200, n_init = 1, init = 'random', random_state = 101)
     clusterer.fit(reduced_data)
@@ -128,7 +128,7 @@ for K in range(2,7):
 # Separando o código para o número ótimo de clusters
 
 # TODO: Aplique o algoritmo de clustering de sua escolha aos dados reduzidos 
-clusterer = KMeans(n_clusters = 5, max_iter = 200, n_init = 1, init = 'random', random_state = 101)
+clusterer = KMeans(n_clusters = 2)
 clusterer.fit(reduced_data)
 
 # TODO: Preveja o cluster para cada ponto de dado
@@ -147,13 +147,10 @@ reduced_data_test = reduced_data.values
 # Visualising the clusters
 plt.scatter(reduced_data_test[preds == 0, 0], reduced_data_test[preds == 0, 1], s = 10, c = 'red', label = 'Cluster 1')
 plt.scatter(reduced_data_test[preds == 1, 0], reduced_data_test[preds == 1, 1], s = 10, c = 'blue', label = 'Cluster 2')
-plt.scatter(reduced_data_test[preds == 2, 0], reduced_data_test[preds == 2, 1], s = 10, c = 'green', label = 'Cluster 3')
-plt.scatter(reduced_data_test[preds == 3, 0], reduced_data_test[preds == 3, 1], s = 10, c = 'yellow', label = 'Cluster 4')
-plt.scatter(reduced_data_test[preds == 4, 0], reduced_data_test[preds == 4, 1], s = 10, c = 'brown', label = 'Cluster 5')
 plt.scatter(centers[:, 0], centers[:, 1], s = 50, c = 'black', label = 'Centroids')
-plt.title('Clusters of customers')
-plt.xlabel('Annual Income (k$)')
-plt.ylabel('Spending Score (1-100)')
+plt.title('Agrupamento dos clientes')
+plt.xlabel('PCA 1')
+plt.ylabel('PCA 2')
 plt.legend()
 plt.show()
 
