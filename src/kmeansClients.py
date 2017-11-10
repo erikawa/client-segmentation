@@ -161,7 +161,7 @@ log_centers = pca.inverse_transform(centers)
 true_centers = np.exp(log_centers)
 
 # Mostre os verdadeiros centros
-segments = ['Segment {}'.format(i) for i in range(0,len(centers))]
+segments = ['Cluster {}'.format(i) for i in range(1,len(centers)+1)]
 true_centers = pd.DataFrame(np.round(true_centers), columns = data.keys())
 true_centers.index = segments
 display(true_centers)
