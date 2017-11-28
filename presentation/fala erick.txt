@@ -1,0 +1,10 @@
+Aprendizado de máquina
+
+O apendizado de máquina é um campo em Inteligência artificial, utilizada para reconhecer
+padrões, fazer predições ou associações.
+O aprendizado de máquina é majoritáriamente dividido em dois modelos, o Aprendizado Supervisionado
+e o não supervisionado.
+
+PCA
+
+É utilizado para reduzir as dimensões da base de dados;
