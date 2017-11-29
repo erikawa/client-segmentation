@@ -1,10 +1,26 @@
-Aprendizado de máquina
+﻿Aprendizado de máquina
 
 O apendizado de máquina é um campo em Inteligência artificial, utilizada para reconhecer
 padrões, fazer predições ou associações.
-O aprendizado de máquina é majoritáriamente dividido em dois modelos, o Aprendizado Supervisionado
+O aprendizado de máquina existem duas abordagens principais o Aprendizado Supervisionado
 e o não supervisionado.
+
+O supervisionado é utilizado quando se tem um conjunto de dado x e um outro conjunto de dado y associado a ele, dessa forma é possível comparar se tal conjunto corresponde a tal resposta
+
+O não supervisionado é utilizado quando se tem um conjunto de dado x sem um conjunto de resposta associado, então você não sabe o que está buscando.
+
+Como no nosso caso estamos analisando as compras de um cliente
 
 PCA
 
 É utilizado para reduzir as dimensões da base de dados;
+
+
+K-means
+
+Uma abordagem simples em aprendizado de máquina não supervisionado para segmentar os dados em subgrupos distintos mas que carregam caracteristicas específicas dentro deles.
+Como estamos analisando os gastos dos clientes e queremos segmenta-los em diferentes perfis, nós decidimos utilizar este algoritmo
+
+Clusters
+
+Dentro do algoritmo kmeans cada grupo é chamado de cluster, e antes de aplicar ele, precisamos definir quantos clusters
